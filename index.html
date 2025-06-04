@@ -1,83 +1,84 @@
-import { defineConfig } from "vite";
-import { resolve } from "path";
-import { VitePWA } from "vite-plugin-pwa";
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="view-transition" content="same-origin" />
+    <meta
+      name="description"
+      content="StoryApp - Aplikasi berbagi cerita dan lokasi dengan peta interaktif. Bagikan cerita Anda dengan dunia!"
+    />
+    <meta
+      name="keywords"
+      content="story, cerita, berbagi, peta, lokasi, aplikasi web"
+    />
+    <meta name="author" content="StoryApp Team" />
+    <link rel="shortcut icon" href="./favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <title>StoryApp - Aplikasi Berbagi Cerita</title>
 
-const isProd = process.env.NODE_ENV === "production";
-const base = isProd ? "/Story-App-Web/" : "/"; // Ganti sesuai nama repo GitHub Pages kamu
+    <link rel="manifest" href="manifest.webmanifest" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="apple-touch-icon" href="/Story-App-Web/icons/icon-192x192.png" />
 
-export default defineConfig({
-  base,
-  build: {
-    outDir: resolve(__dirname, "dist"),
-    emptyOutDir: true,
-  },
-  resolve: {
-    alias: {
-      "@": resolve(__dirname, "src"),
-    },
-  },
-  plugins: [
-    VitePWA({
-      registerType: "autoUpdate",
-      strategies: "generateSW",
-      workbox: {
-        globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
-        runtimeCaching: [
-          {
-            urlPattern: /^https:\/\/story-api\.dicoding\.dev\//,
-            handler: "NetworkFirst",
-            options: {
-              cacheName: "story-api",
-              networkTimeoutSeconds: 3,
-            },
-          },
-        ],
-      },
-      includeAssets: [
-        "favicon.png",
-        "robots.txt",
-        "apple-touch-icon.png",
-        "icons/icon-192x192.png",
-        "icons/icon-512x512.png",
-        "screenshots/home-desktop.png",
-        "screenshots/home-mobile.png",
-      ],
-      manifest: {
-        name: "StoryApp",
-        short_name: "StoryApp",
-        description: "Aplikasi berbagi cerita dan lokasi",
-        theme_color: "#3b82f6",
-        background_color: "#ffffff",
-        display: "standalone",
-        start_url: base,
-        scope: base,
-        icons: [
-          {
-            src: `${base}icons/icon-192x192.png`, // pakai backtick!
-            sizes: "192x192",
-            type: "image/png",
-          },
-          {
-            src: `${base}icons/iconku2-512x512.png`,
-            sizes: "512x512",
-            type: "image/png",
-          },
-        ],
-        screenshots: [
-          {
-            src: "screenshots/home-desktop.png",
-            sizes: "1031x579",
-            type: "image/png",
-            form_factor: "wide",
-          },
-          {
-            src: "screenshots/home-mobile.png",
-            sizes: "723x833",
-            type: "image/png",
-            form_factor: "narrow",
-          },
-        ],
-      },
-    }),
-  ],
-});
+    <link rel="stylesheet" href="src/styles/style.css" />
+    <a href="#main-content" class="skip-link">Lewati ke konten utama</a>
+    <script type="module" crossorigin src="/Story-App-Web/assets/index-B8DvPVC_.js"></script>
+    <link rel="stylesheet" crossorigin href="/Story-App-Web/assets/index-sndK8N_x.css">
+  <link rel="manifest" href="/Story-App-Web/manifest.webmanifest"></head>
+  <body>
+    <header role="banner">
+      <div class="main-header container">
+        <a class="brand-name" href="#/" aria-label="StoryApp - Halaman utama">
+          <span aria-hidden="true">📖</span> StoryApp
+        </a>
+
+        <nav
+          id="navigation-drawer"
+          class="navigation-drawer"
+          role="navigation"
+          aria-label="Menu navigasi utama"
+        >
+          <ul id="nav-list" class="nav-list" role="menubar"></ul>
+        </nav>
+
+        <button
+          id="drawer-button"
+          class="drawer-button"
+          aria-label="Buka menu navigasi"
+          aria-expanded="false"
+          aria-controls="navigation-drawer"
+        >
+          ☰
+        </button>
+      </div>
+    </header>
+
+    <main
+      id="main-content"
+      class="main-content animate-content"
+      role="main"
+      tabindex="-1"
+    ></main>
+
+    <footer role="contentinfo" class="app-footer">
+      <div class="container">
+        <p>&copy; 2025 StoryApp. Aplikasi untuk berbagi cerita dan lokasi.</p>
+      </div>
+    </footer>
+  </body>
+</html>
