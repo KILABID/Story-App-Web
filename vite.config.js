@@ -6,8 +6,6 @@ const GITHUB_REPO_NAME = "Story-App-Web";
 
 export default defineConfig({
   base: `/${GITHUB_REPO_NAME}/`,
-  root: resolve(__dirname, "src"),
-  publicDir: resolve(__dirname, "src", "public"),
   build: {
     outDir: resolve(__dirname, "dist"),
     emptyOutDir: true,
@@ -53,10 +51,17 @@ export default defineConfig({
             },
           },
         ],
-        // Membersihkan aset lama dari precache
         cleanupOutdatedCaches: true,
       },
-      includeAssets: ["favicon.png", "robots.txt", "apple-touch-icon.png"],
+      includeAssets: [
+        "favicon.png",
+        "robots.txt",
+        "apple-touch-icon.png",
+        "icons/icon-192x192.png",
+        "icons/iconku2-512x512.png",
+        "screenshots/home-desktop.png",
+        "screenshots/home-mobile.png",
+      ],
       manifest: {
         name: "StoryApp",
         short_name: "StoryApp",
@@ -64,16 +69,16 @@ export default defineConfig({
         theme_color: "#3b82f6",
         background_color: "#ffffff",
         display: "standalone",
-        start_url: ".",
-        scope: ".",
+        start_url: `/${GITHUB_REPO_NAME}/`,
+        scope: `/${GITHUB_REPO_NAME}/`,
         icons: [
           {
-            src: "icons/icon-192x192.png",
+            src: `icons/icon-192x192.png`,
             sizes: "192x192",
             type: "image/png",
           },
           {
-            src: "icons/iconku2-512x512.png",
+            src: `icons/iconku2-512x512.png`,
             sizes: "512x512",
             type: "image/png",
           },
