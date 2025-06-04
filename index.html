@@ -38,9 +38,9 @@ export default defineConfig({
         "robots.txt",
         "apple-touch-icon.png",
         "icons/icon-192x192.png",
-        "icons/iconku2-512x512.png",
+        "icons/icon-512x512.png",
         "screenshots/home-desktop.png",
-        "screenshots/home-mobile2.png",
+        "screenshots/home-mobile.png",
       ],
       manifest: {
         name: "StoryApp",
@@ -53,7 +53,7 @@ export default defineConfig({
         scope: base,
         icons: [
           {
-            src: `${base}icons/icon-192x192.png`,
+            src: `${base}icons/icon-192x192.png`, // pakai backtick!
             sizes: "192x192",
             type: "image/png",
           },
@@ -65,15 +65,16 @@ export default defineConfig({
         ],
         screenshots: [
           {
-            src: `${base}screenshots/home-desktop.png`,
-            sizes: "2560x1440",
+            src: "screenshots/home-desktop.png",
+            sizes: "1031x579",
             type: "image/png",
             form_factor: "wide",
           },
           {
-            src: `${base}screenshots/home-mobile2.png`,
-            sizes: "960x1600",
+            src: "screenshots/home-mobile.png",
+            sizes: "723x833",
             type: "image/png",
+            form_factor: "narrow",
           },
         ],
       },
