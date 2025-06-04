@@ -1,89 +1,96 @@
-import { defineConfig } from 'vite';
-import { resolve } from 'path';
-import { VitePWA } from 'vite-plugin-pwa';
+import { defineConfig } from "vite";
+import { resolve } from "path";
+import { VitePWA } from "vite-plugin-pwa";
+
+const GITHUB_REPO_NAME = "Story-App-Web";
 
 export default defineConfig({
-  root: resolve(__dirname, 'src'),
-  publicDir: resolve(__dirname, 'src', 'public'),
+  base: `/${GITHUB_REPO_NAME}/`,
+  root: resolve(__dirname, "src"),
+  publicDir: resolve(__dirname, "src", "public"),
   build: {
-    outDir: resolve(__dirname, 'dist'),
+    outDir: resolve(__dirname, "dist"),
     emptyOutDir: true,
   },
   resolve: {
     alias: {
-      '@': resolve(__dirname, 'src'),
+      "@": resolve(__dirname, "src"),
     },
   },
   plugins: [
     VitePWA({
-      registerType: 'autoUpdate',
-      strategies: 'generateSW',
+      registerType: "autoUpdate",
+      strategies: "generateSW",
       workbox: {
-        cleanupOutdatedCaches: true,
-        clientsClaim: true,
-        skipWaiting: true,
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,jpg,jpeg,gif,webp}'],
+        globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
+        navigateFallback: "index.html",
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/story-api\.dicoding\.dev\//,
-            handler: 'NetworkFirst',
+            handler: "NetworkFirst",
             options: {
-              cacheName: 'story-api',
+              cacheName: "story-api",
               networkTimeoutSeconds: 3,
               cacheableResponse: {
-                statuses: [0, 200]
-              }
-            },
-          },
-          {
-            urlPattern: /\.(?:png|jpg|jpeg|svg|gif|webp)$/,
-            handler: 'CacheFirst',
-            options: {
-              cacheName: 'images',
-              expiration: {
-                maxEntries: 100,
-                maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
+                statuses: [0, 200],
               },
             },
-          }
+          },
+          {
+            urlPattern: ({ url }) =>
+              url.origin === "https://story-api.dicoding.dev" &&
+              url.pathname.startsWith("/images/stories/"),
+            handler: "CacheFirst",
+            options: {
+              cacheName: "story-api-images",
+              expiration: {
+                maxEntries: 50,
+                maxAgeSeconds: 30 * 24 * 60 * 60,
+              },
+              cacheableResponse: {
+                statuses: [0, 200],
+              },
+            },
+          },
         ],
+        // Membersihkan aset lama dari precache
+        cleanupOutdatedCaches: true,
       },
-      includeAssets: ['favicon.png', 'robots.txt', 'apple-touch-icon.png'],
+      includeAssets: ["favicon.png", "robots.txt", "apple-touch-icon.png"],
       manifest: {
-        name: 'StoryApp',
-        short_name: 'StoryApp',
-        description: 'Aplikasi berbagi cerita dan lokasi',
-        theme_color: '#3b82f6',
-        background_color: '#ffffff',
-        display: 'standalone',
-        orientation: 'portrait',
-        start_url: '/',
-        scope: '/',
+        name: "StoryApp",
+        short_name: "StoryApp",
+        description: "Aplikasi berbagi cerita dan lokasi",
+        theme_color: "#3b82f6",
+        background_color: "#ffffff",
+        display: "standalone",
+        start_url: ".",
+        scope: ".",
         icons: [
           {
-            src: 'icons/icon-192x192.png',
-            sizes: '192x192',
-            type: 'image/png',
-            purpose: 'any'
+            src: "icons/icon-192x192.png",
+            sizes: "192x192",
+            type: "image/png",
           },
           {
-            src: 'icons/icon-512x512.png',
-            sizes: '512x512',
-            type: 'image/png',
-            purpose: 'any'
+            src: "icons/iconku2-512x512.png",
+            sizes: "512x512",
+            type: "image/png",
+          },
+        ],
+        screenshots: [
+          {
+            src: "screenshots/home-desktop.png",
+            sizes: "1031x579",
+            type: "image/png",
+            form_factor: "wide",
           },
           {
-            src: 'icons/icon-192x192.png',
-            sizes: '192x192',
-            type: 'image/png',
-            purpose: 'maskable'
+            src: "screenshots/home-mobile.png",
+            sizes: "723x833",
+            type: "image/png",
+            form_factor: "narrow",
           },
-          {
-            src: 'icons/icon-512x512.png',
-            sizes: '512x512',
-            type: 'image/png',
-            purpose: 'maskable'
-          }
         ],
       },
     }),
