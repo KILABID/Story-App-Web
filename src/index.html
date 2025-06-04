@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="view-transition" content="same-origin" />
+    <meta
+      name="description"
+      content="StoryApp - Aplikasi berbagi cerita dan lokasi dengan peta interaktif. Bagikan cerita Anda dengan dunia!"
+    />
+    <meta
+      name="keywords"
+      content="story, cerita, berbagi, peta, lokasi, aplikasi web"
+    />
+    <meta name="author" content="StoryApp Team" />
+    <link rel="shortcut icon" href="/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <title>StoryApp - Aplikasi Berbagi Cerita</title>
+
+    <link rel="manifest" href="manifest.webmanifest" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+
+    <script type="module" src="/scripts/index.js"></script>
+    <a href="#main-content" class="skip-link">Lewati ke konten utama</a>
+  </head>
+  <body>
+    <header role="banner">
+      <div class="main-header container">
+        <a class="brand-name" href="#/" aria-label="StoryApp - Halaman utama">
+          <span aria-hidden="true">📖</span> StoryApp
+        </a>
+
+        <nav
+          id="navigation-drawer"
+          class="navigation-drawer"
+          role="navigation"
+          aria-label="Menu navigasi utama"
+        >
+          <ul id="nav-list" class="nav-list" role="menubar"></ul>
+        </nav>
+
+        <button
+          id="drawer-button"
+          class="drawer-button"
+          aria-label="Buka menu navigasi"
+          aria-expanded="false"
+          aria-controls="navigation-drawer"
+        >
+          ☰
+        </button>
+      </div>
+    </header>
+
+    <main
+      id="main-content"
+      class="main-content animate-content"
+      role="main"
+      tabindex="-1"
+    ></main>
+
+    <footer role="contentinfo" class="app-footer">
+      <div class="container">
+        <p>&copy; 2025 StoryApp. Aplikasi untuk berbagi cerita dan lokasi.</p>
+      </div>
+    </footer>
+  </body>
+</html>
